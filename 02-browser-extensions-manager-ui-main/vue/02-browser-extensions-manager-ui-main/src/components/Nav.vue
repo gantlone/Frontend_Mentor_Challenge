@@ -1,13 +1,14 @@
 <script setup>
 import { ref } from 'vue'
 import sun from '@/assets/images/icon-sun.svg' 
-import { computed } from 'vue'
-import { useStore } from 'vuex'
+import moon from '@/assets/images/icon-moon.svg' 
+import DarkLogo from '@/assets/images/logo_modified.svg'
+import LightLogo from '@/assets/images/logo.svg'
+const isDark = ref(false)
 
-const store = useStore()
-const isDark = computed(() => store.getters.isDarkMode)
-const toggleTheme = () => {
-  store.commit('toggleDarkMode')
+function toggleTheme() {
+  isDark.value = !isDark.value
+  document.documentElement.classList.toggle('dark-mode', isDark.value)
 }
 
 // defineProps<{ msg: string }>()
@@ -18,9 +19,12 @@ const count = ref(0)
 <template>
 
   <div class="nav">
-    <div class="logo"/>
-    <div class="mode">
-      <img :src="sun" class="icon" @click="toggleTheme">
+    <!-- <div class="logo"/> -->
+    <DarkLogo class="logo" v-if="isDark"/>
+    <LightLogo class="logo" v-else/>
+    <div class="mode" @click="toggleTheme">
+      <sun class="icon" v-if="isDark"/>
+      <moon class="icon" v-else/>
     </div>
   </div>
 
@@ -30,25 +34,21 @@ const count = ref(0)
   *
     // border: 1px solid red   
   .nav
-    background-color: #fff
+    background-color: var(--nav-color)
     display: flex
     justify-content: space-between
+    align-items: center
     border-radius: 15px
     padding: 10px
     height: 50px
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1)
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1)
     .logo
-      width: 200px
-      height: 100%
-      background-image: url('@/assets/images/logo.svg')
-      background-size: contain
-      background-repeat: no-repeat
-      background-position: left center
+      
       cursor: pointer
     .mode
       width: 50px
       height: 100%
-      background-color: hsl(0, 0%, 93%)
+      background-color: var(--mode-color)
       border-radius: 15px
       display: flex
       align-items: center
@@ -56,7 +56,7 @@ const count = ref(0)
       cursor: pointer
       transition: 0.5s
       .icon
-        filter: brightness(0) saturate(100%) invert(0%)
+        filter: var(--mode-filter)
       &:hover
         border: 1px solid hsl(3, 77%, 44%)
         transform: scale(1.1)

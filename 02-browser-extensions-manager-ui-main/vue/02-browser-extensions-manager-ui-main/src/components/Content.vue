@@ -23,15 +23,8 @@
         <el-switch
     v-model="item.state"
     class="ml-2"
-    style="--el-switch-on-color: #13ce66; --el-switch-off-color: hsl(0, 0%, 78%)"
+    style="--el-switch-on-color: hsl(3, 77%, 44%); --el-switch-off-color: hsl(0, 0%, 78%)"
   />
-        <!-- <div class="ios-switch active">
-          <div class="switch-body">
-            <div class="toggle">
-
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
     
@@ -85,10 +78,10 @@ function delValue(index) {
   *
     // border: 1px solid black
   h2,h4
-    color: hsl(227, 75%, 14%) 
+    color: var(--h24-color)
     padding: 0
   p 
-    color: hsl(226, 11%, 37%)
+    color: var(--p-color)
     padding: 0
   .filter
     padding-top: 30px
@@ -101,6 +94,8 @@ function delValue(index) {
       align-items: center
   .right 
     button
+      background: var(--nav-color)
+      color: var(--p-color)
       border-radius: 25px
       height: 50px
       font-size: 20px
@@ -113,9 +108,10 @@ function delValue(index) {
     gap: 20px
     
   .card
-    background-color: #fff
+    background-color: var(--nav-color)
     border-radius: 15px
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1)
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1)
+    border: 1px solid var(--border-color)
     padding: 20px 
     height: 170px
   .top,.down 
@@ -131,7 +127,9 @@ function delValue(index) {
       p 
         margin-top: 10px
     button
-      border: 1px solid hsl(0, 0%, 78%)
+      border: 1px solid var(--border2-color)
+      background: var(--nav-color)
+      color: var(--p-color)
       border-radius: 25px
       height:45px
       font-size: 15px
@@ -141,19 +139,4 @@ function delValue(index) {
       border-color: hsl(3, 77%, 44%)
   .down
     align-items: center
-  .ios-switch
-    display: flex
-    flex-direction: row
-    align-items: center
-  .ios-switch .switch-body
-    width: 40px
-    background-color: hsl(0, 0%, 78%)
-    border-radius: 24px
-    box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.1)
-  .ios-switch .switch-body .toggle
-    width: 18px
-    height: 18px
-    background-color: #fff
-    border-radius: 50%
-    margin: 3px
 </style>

@@ -5,12 +5,36 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: hsl(217, 61%, 90%);
+  /* background-color: hsl(217, 61%, 90%); */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --bg-color: linear-gradient(180deg, #EBF2FC 0%, #EEF8F9 100%);
+  --nav-color: hsl(200, 60%, 99%);
+  --border-color: #fff;
+  --border2-color: hsl(0, 0%, 78%);
+  --mode-color: hsl(0, 0%, 93%);
+  --mode-filter: brightness(0) saturate(100%) invert(0%);
+  --h24-color: hsl(227, 75%, 14%);
+  --p-color: hsl(226, 11%, 37%);
+  --btn-filter-color: 0 0 0 2px white,   /* 外圈留1px白色線 */
+  0 0 0 4px hsl(3, 77%, 44%);
+}
+
+.dark-mode {
+  --bg-color: linear-gradient(180deg, #040918 0%, #091540 100%);
+  --nav-color: hsl(226, 25%, 17%);
+  --border-color: hsl(0, 0%, 30%);
+  --border2-color: hsl(0, 0%, 30%);
+  --mode-color: hsl(225, 23%, 24%);
+  --mode-filter: brightness(1) saturate(100%) invert(0%);
+  --h24-color: #fff;
+  --p-color: hsl(200, 60%, 99%);
+  --btn-filter-color: 0 0 0 2px black,   /* 外圈留1px白色線 */
+  0 0 0 4px hsl(3, 77%, 44%);
 }
 
 a {
@@ -27,6 +51,7 @@ body {
   padding: 50px;
   min-width: 320px;
   min-height: 100vh;
+  background-image: var(--bg-color);
 }
 
 h1 {
@@ -52,9 +77,7 @@ button:focus,
 button:focus-visible {
   background-color: hsl(3, 77%, 44%);
   color: #fff;
-  box-shadow:
-    0 0 0 2px white,   /* 外圈留1px白色線 */
-    0 0 0 4px hsl(3, 77%, 44%);
+  box-shadow: var(--btn-filter-color);
 }
 
 .card {
@@ -62,7 +85,7 @@ button:focus-visible {
 }
 
 #app {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   /* max-width: 1280px; */
   /* margin: 0 auto; */
   height: 100%;

@@ -20,14 +20,5 @@
   *
     // border: 1px solid black
     display: flex
-  
-  // .dark-theme 
-  //   background-color: #121212
-  //   color: white
-
-
-  // .light-theme 
-  //   background-color: #ffffff
-  //   color: black
 
 </style>
