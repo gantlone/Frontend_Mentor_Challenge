@@ -4,13 +4,13 @@
       <h2>Extensions List</h2>
     </div>
     <div class="right">
-      <button>All</button>
-      <button>Active</button>
-      <button>Inactive</button>
+      <button @click="state=1">All</button>
+      <button @click="state=2">Active</button>
+      <button @click="state=3">Inactive</button>
     </div>
   </div>
   <div class="cards">
-    <div class="card" v-for="(item, index) in messages">
+    <div class="card" v-for="(item, index) in filteredMessages(state)">
       <div class="top">
         <img :src="strIconPath(item.path)" alt="select-icon">
         <div class="str">
@@ -19,14 +19,19 @@
         </div>
       </div>
       <div class="down">
-        <button>Remove</button>
-        <div class="ios-switch active">
+        <button @click="delValue(index)">Remove</button>
+        <el-switch
+    v-model="item.state"
+    class="ml-2"
+    style="--el-switch-on-color: #13ce66; --el-switch-off-color: hsl(0, 0%, 78%)"
+  />
+        <!-- <div class="ios-switch active">
           <div class="switch-body">
             <div class="toggle">
 
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     
@@ -34,7 +39,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import devlens from '@/assets/images/logo-devlens.svg' 
 
 const messages = ref([
@@ -54,52 +59,101 @@ function strIconPath(path) {
   return fullPath;
 }
 
+const state = ref(1);
+
+const filteredMessages = (state) => {
+  console.log(state);
+  if(state==1){
+    return messages.value;
+  }
+  else if(state==2){
+    return messages.value.filter(item => item.state === true);
+  }
+  else{
+    return messages.value.filter(item => item.state === false);
+  }
+};
+
+
+function delValue(index) {
+  messages.value.splice(index, 1);
+}
+
 </script>
 
 <style lang="sass" scoped>
   *
-    border: 1px solid black
+    // border: 1px solid black
   h2,h4
     color: hsl(227, 75%, 14%) 
+    padding: 0
   p 
     color: hsl(226, 11%, 37%)
+    padding: 0
   .filter
     padding-top: 30px
     font-size: 30px
+    width: 100%
     display: inline-block
     @media (min-width: 970px) 
       display: flex
       justify-content: space-between
-  .top,.down 
-    display: flex
-    justify-content: space-between
+      align-items: center
+  .right 
+    button
+      border-radius: 25px
+      height: 50px
+      font-size: 20px
+      padding: 10px 20px
+      margin: 0px 0px 0px 10px
+      width: auto
   .cards
-    display: flex
-    flex-wrap: wrap
-    justify-content: space-between
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(350px,1fr))
+    gap: 20px
     
   .card
     background-color: #fff
     border-radius: 15px
-    margin: 10px 0px
-    display: inline-block
-    @media (min-width: 500px)
-      width: 350px
-    
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1)
+    padding: 20px 
+    height: 170px
+  .top,.down 
+    display: flex
+    justify-content: space-between
+    align-items: start
+    img
+      margin-right: 15px
+    .str
+      text-align: left
+      h4
+        margin: 0
+      p 
+        margin-top: 10px
+    button
+      border: 1px solid hsl(0, 0%, 78%)
+      border-radius: 25px
+      height:45px
+      font-size: 15px
+      padding: 10px 20px
+      width: auto
+    button:hover
+      border-color: hsl(3, 77%, 44%)
+  .down
+    align-items: center
   .ios-switch
     display: flex
     flex-direction: row
     align-items: center
-    margin: 10px 0
   .ios-switch .switch-body
-    width: 96px
+    width: 40px
     background-color: hsl(0, 0%, 78%)
-    border-radius: 48px
+    border-radius: 24px
     box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.1)
   .ios-switch .switch-body .toggle
-    width: 36px
-    height: 36px
+    width: 18px
+    height: 18px
     background-color: #fff
     border-radius: 50%
-    margin: 5px
+    margin: 3px
 </style>
