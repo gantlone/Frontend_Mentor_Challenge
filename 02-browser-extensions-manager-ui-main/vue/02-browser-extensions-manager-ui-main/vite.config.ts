@@ -11,4 +11,5 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'), // ← 確保有這個
     },
   },
+  base: '/Frontend_Mentor_Challenge/'
 })
