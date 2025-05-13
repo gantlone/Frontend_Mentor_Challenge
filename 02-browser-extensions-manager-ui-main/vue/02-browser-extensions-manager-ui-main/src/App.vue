@@ -11,7 +11,7 @@
 <template>
   <!-- <div :class="{ 'dark-theme': isDark, 'light-theme': !isDark }"> -->
     <Nav/>
-    <Content/>
+    <router-view />
   <!-- </div> -->
 
 </template>

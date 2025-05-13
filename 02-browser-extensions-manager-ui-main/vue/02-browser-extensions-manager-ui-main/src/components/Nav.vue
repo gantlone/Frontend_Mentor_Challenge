@@ -4,6 +4,7 @@ import sun from '@/assets/images/icon-sun.svg'
 import moon from '@/assets/images/icon-moon.svg' 
 import DarkLogo from '@/assets/images/logo_modified.svg'
 import LightLogo from '@/assets/images/logo.svg'
+import { useRouter } from 'vue-router';
 const isDark = ref(false)
 
 function toggleTheme() {
@@ -11,7 +12,17 @@ function toggleTheme() {
   document.documentElement.classList.toggle('dark-mode', isDark.value)
 }
 
-// defineProps<{ msg: string }>()
+const router = useRouter();  // 使用 Vue Router 的 `useRouter` 鉤子
+
+const routerPage = () => {
+  const currentPath = router.currentRoute.value.path;
+  console.log(currentPath);
+  if (currentPath === '/cart') {
+    router.back(); // pop 回上一頁
+  } else {
+    router.push('/cart'); // push 到 cart
+  }
+};
 
 const count = ref(0)
 </script>
@@ -20,8 +31,8 @@ const count = ref(0)
 
   <div class="nav">
     <!-- <div class="logo"/> -->
-    <DarkLogo class="logo" v-if="isDark"/>
-    <LightLogo class="logo" v-else/>
+    <DarkLogo class="logo" @click="routerPage" v-if="isDark"/>
+    <LightLogo class="logo" @click="routerPage" v-else/>
     <div class="mode" @click="toggleTheme">
       <sun class="icon" v-if="isDark"/>
       <moon class="icon" v-else/>
